@@ -1,0 +1,115 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  cursor: crosshair;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: black;
+  z-index: -1;
+}
+h1 {
+  position: fixed;
+  color: white;
+  left: 50%;
+  top: 80px;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  font-size: 40px;
+}
+.mover {
+  transition: top 2s ease-in-out, left 2s ease-in-out;
+}
+
+.checkbox {
+  z-index: 10;
+}
+
+input[type="checkbox"] {
+  display: grid;
+  position: absolute;
+
+  border-radius: 50%;
+  background-color: black;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.755);
+
+  width: 50px;
+  height: 50px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  -webkit-appearance: none;
+  appearance: none;
+  place-content: center;
+  z-index: 10;
+}
+
+input[type="checkbox"]:hover {
+  cursor: all-scroll;
+  border: 2px solid white;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 50px;
+  height: 50px;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  background-color: white;
+  border-radius: 50%;
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+#follower {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  filter: blur(50px);
+  transform: translate(-50%, -50%);
+  background-color: white;
+  position: absolute;
+  pointer-events: none; /* 마우스 이벤트를 무시하도록 설정 */
+  z-index: 5;
+  animation: light 5s ease-in-out infinite;
+}
+.clear {
+  animation: changeColor 5s infinite;
+}
+
+@keyframes light {
+  0%,
+  40%,
+  80% {
+    background-color: #fff;
+  }
+  20%,
+  60%,
+  100% {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+@keyframes changeColor {
+  0% {
+    color: red;
+  }
+  25% {
+    color: blue;
+  }
+  50% {
+    color: green;
+  }
+  75% {
+    color: orange;
+  }
+  100% {
+    color: purple;
+  }
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>check btn</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1 id="title">총 8개</h1>
+    <label class="checkbox">
+      <input class="mover" type="checkbox" name="" id="" />
+      <input class="mover" type="checkbox" name="" id="" />
+      <input class="mover" type="checkbox" name="" id="" />
+      <input class="mover" type="checkbox" name="" id="" />
+      <input class="mover" type="checkbox" name="" id="" />
+      <input class="mover" type="checkbox" name="" id="" />
+      <input class="mover" type="checkbox" name="" id="" />
+      <input class="mover" type="checkbox" name="" id="" />
+    </label>
+
+    <div id="follower"></div>
+
+    <script>
+      let movers = document.querySelectorAll(".mover");
+      let follower = document.getElementById("follower");
+
+      function getRandomPosition(_element) {
+        let top = Math.floor(Math.random() * window.innerHeight);
+        let left = Math.floor(Math.random() * window.innerWidth);
+
+        _element.style.top = top + "px";
+        _element.style.left = left + "px";
+      }
+
+      function checkAllChecked() {
+        let allChecked = true;
+        movers.forEach((mover) => {
+          if (!mover.checked) {
+            allChecked = false;
+          }
+        });
+        if (allChecked) {
+          console.log("모두 선택됨");
+          clear()
+        } else {
+          console.log("아직 모두 선택되지 않음");
+        }
+      }
+
+      function clear(){
+        document.body.style.backgroundColor = "lightblue"; 
+        document.getElementById("title").innerHTML = "All CLEAR"
+        document.getElementById("title").classList.add("clear")
+      }
+
+      movers.forEach((mover, index) => {
+        getRandomPosition(mover);
+        setInterval(function () {
+          getRandomPosition(mover);
+          checkAllChecked();
+        }, 1400 * (index + 1));
+      });
+
+      document.addEventListener("mousemove", function (e) {
+        let x = e.clientX;
+        let y = e.clientY;
+
+        follower.style.left = x + "px";
+        follower.style.top = y + "px";
+      });
+    </script>
+  </body>
+</html>
